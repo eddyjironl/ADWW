@@ -104,6 +104,9 @@ if ($lcStarSession == 1){
 				<br>
 				<label class="labelnormal">Descuento</label>
 				<input type="text" id="ndescamt" name="ndescamt"  class="sayamt" readonly>
+				<input type="checkbox" id="lndescg" name= "lndescg" >Aplicar Descuento en forma General </input>
+				<input type="number" id="ndescg" name= "ndescg" >
+				
 				<br>
 				<label class="labelnormal">Impuesto</label>
 				<input type="text" id="ntaxamt"  name="ntaxamt" class="sayamt" readonly>

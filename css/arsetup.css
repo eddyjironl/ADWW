@@ -1,0 +1,36 @@
+
+#arsetup{	
+	width:500px;
+	height:615px;
+	padding:5px;
+}
+fieldset{
+	border:none;
+}
+
+#comentarios{
+	border:none;
+	
+}
+#div_botones{		
+	position:static;
+	margin-top:35%;
+	width:130px;
+	margin-left:35%;
+}
+
+#lbestado{
+	margin-left:200px;
+}
+.lbtitle{
+	color:cyan;
+	background:grey;
+	padding-left:5px;
+	padding-right:5px;
+}
+.tabcontent {
+	height:300px;
+	border:solid 1px black;
+}
+
+

@@ -6,12 +6,9 @@
 	border-radius:10px;
 	margin-left:2px;
 }
-
 .contenedor_objetos{
 	padding: 5px;
 }
-
-
 /* CONFIGURACION NUEVO MENU DEL SISTEMA.*/
 /* ------------------------------------------------------------------*/
 .menu_area_bloqueo{
@@ -94,8 +91,6 @@ Estilos del View Menu
 	left: 0;
 	/*transition: opacity 400ms ease-in;*/
 }
-
-
 .mx_barra_sencilla{
     /* formato en verde.*/
 	background:green;  
@@ -106,20 +101,16 @@ Estilos del View Menu
 	padding:10px;
 	border-radius:10px 10px 0px 0px;
 }
-
 .mx_formato_datos{	
 	background-color:#dcdcdc;
 	color: #000000;
 	font-size:11px;
 	font-family:arial;
 }
-
 .mx_area_encabezado{
 	color:blue;
 	margin:auto 10px;
 }
-
-
 #mx_detalle tr:hover{
 	color:black;
 	box-shadow:cyan 0px 10px 10px;
@@ -130,14 +121,12 @@ Estilos del View Menu
 	color:blue;
 	cursor:hand;
 }
-
 .mx_area_detalles{
 	height:300px;	
 	color:blue;
 	overflow: auto;
 	margin:auto 10px;
 }
-
 /* definida como clase para hacer que los otros menus funcionen igual */
 
 .listados:hover{
@@ -150,7 +139,6 @@ Estilos del View Menu
 	color:blue;
 	cursor:hand;
 }
-
 /* 
 estilos del tabs 
 --------------------------------------------------------------------------------------
@@ -240,7 +228,6 @@ input, select{
 	background-color:rgb(240,240,240);
 	
 }
-
 .textkey{
 	padding:1px;
 	border:solid 1px rgb(240,240,240);
@@ -256,8 +243,6 @@ input, select{
 	background-color:gray;
 	color: white;
 }
-
-
 .saykey{
 	padding:1px;
 	margin-bottom:3px;
@@ -353,6 +338,11 @@ input, select{
 	background-color:rgb(255,255,128);
 	color:black;
 }
+.input_checkbox{
+	font-family: arial;
+	font-weight: bold;
+}
+
 /* estilo base para formulario*/
 /* buscando poner estilo responsive */
 .form2{

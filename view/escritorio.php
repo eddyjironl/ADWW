@@ -16,7 +16,12 @@ if (vc_funciones::Star_session() == 1){
 		<script src="../js/escritorio.js?v1" ></script>
 		<link rel="shortcut icon" type="image/x-icon" href="../photos/vc2009.ico" />
 	</head>
-	
+<style>
+  #helps{
+    display: inline-block;
+
+  }
+</style>
 	<!-- background="../photos/fondo3.png" -->
 
 	<body id="espacio"  background="fondo3.png">
@@ -101,6 +106,10 @@ if (vc_funciones::Star_session() == 1){
 					<option value="PL"> Recursos Humanos</option>
 					<option value="CT"> Contabilidad General</option>
 				</select>
+			<div id="helps" class="contenedor_objetos">
+				<a href="../manuales.pdf" target="_blank" placeholder = "Descarga los manuales actualizados del sistema"><strong>Manual del sistema</strong></a>
+			
+			</div>
 		</footer>
 		<script>
 			get_xm_menu();

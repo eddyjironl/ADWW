@@ -30,15 +30,63 @@ function init(){
 	btsalir.style.display  = "inline";
 	btnuevaf.addEventListener("click",nueva_factura,false);
 	btVer.addEventListener("click",print_invoice,false);
-
 	// -----------------------------------------------------------------
 	// CODIGO PARA LOS MENUS INTERACTIVOS.
-	document.getElementById("cservno1").addEventListener("change",upddet,false);
+	document.getElementById("cservno1").addEventListener("change",function(){
+		document.getElementById("nqty1").focus();
+	},false);
+	document.getElementById("nqty1").addEventListener("change",upddet,false);
 	document.getElementById("btcservno").addEventListener("click",function(){
         get_menu_list("arserm","showmenulist","cservno1","upddet");
     },false);
 	// ------------------------------------------------------------------------
 	clear_view();
+	// procesando descuento.
+	document.getElementById("lndescg").addEventListener("click",show_generalndesc, false);
+	document.getElementById("ndescg").style.display = "none";
+	document.getElementById("ndescg").addEventListener("change",set_general_ndesc,false);
+
+}
+
+function show_generalndesc(){
+	var lcstring = document.getElementById("ndescg").style.display;
+	if (lcstring == "none"){
+		document.getElementById("ndescg").style.display = "inline-block";
+	}else{
+		var oinput4 = document.querySelectorAll("#ndesc");
+		for (var i=0; i<oinput4.length; i++){
+			oinput4[i].value = 0;
+		}
+		document.getElementById("ndescg").style.display = "none";
+		document.getElementById("ndescg").value = 0;
+	}
+	cksum();
+}
+function set_general_ndesc(){
+	var oinput1 = document.querySelectorAll("#cservno");
+	var oinput4 = document.querySelectorAll("#ndesc");
+	var lndesc_aply  = document.getElementById("ndescg").value;
+	var lndesc_final = 0;
+	var lcmsg = "";
+
+	for (var i=0; i<oinput1.length; i++){
+		// por cada vuelta obtiene el valor del descuento permitido por cada codigo.
+		lndesc = parseFloat(get_max_desc(oinput1[i].value));
+		// deside si pone el descuento general o el descuento maximo permitido en cada linea
+		if (lndesc_aply > lndesc ){
+			lndesc_final = lndesc;			
+			lcmsg = "Existen articulos cuyo descuento maximo unitario no permite el descuento global solicitado";
+		}else{
+			lndesc_final = lndesc_aply;			
+		}
+		oinput4[i].value = lndesc_final;
+	}
+	// recalculando todo.
+	cksum();
+	// alertando que algun articulo no puede llevar el descuento global por estar por arriba de lo permitido.
+	if (lcmsg != ""){
+		getmsgalert(lcmsg);
+	}
 }
 function get_tc_rate(){
 	var oRequest = new XMLHttpRequest();
@@ -143,7 +191,9 @@ function cerrar_pantalla_pago(){
 	efectivo.value="";
 	ck_vuelto();
 }
-function clear_view(){
+function clear_view(){ 
+	get_clear_view();
+	document.getElementById("ndescg").style.display = "none";
 	var oRequest = new XMLHttpRequest();
 	// Creando objeto para empaquetado de datos.
 	var oDatos   = new FormData();
@@ -159,26 +209,17 @@ function clear_view(){
 	document.getElementById("denddate").value  = get_date_comp();
 	document.getElementById("ctel").value      = "";
 	get_tc_rate();
-
-	// limpiando otros campos para que no quede ningun datos.
-	crefno.value = "";
-	cdesc.value = "";
-	mnotas.value = "";
-	ctrnno1.value = "";
 	// detalle de la factura poniendolo en blanco
-	
 	var lctable = 	'<thead>'+'<tr class="table_det">'+
 		'	<th width="90px">Codigo</th>'+'	<th width="220px">Descripcion de Producto</th>'+
 		'	<th width="75px">Precio</th>'+'	<th width="75px">Cantidad</th>'+
 		'	<th width="50px">Descuento</th>'+'	<th width="50px">IVA %</th>'+
 		'	<th width="75px">Monto</th>'+' </tr></thead>';
 
-		document.getElementById("tdetalles").innerHTML = lctable;
-		//document.getElementById("tdetalles").innerHTML = "";
-	
-	//articulos.innerHTML= "";	
+	document.getElementById("tdetalles").innerHTML = lctable;
 	ninvlinmax = odata.ninvlinmax;
 	// poniendo en cero el pago recibido
+	
 	efectivo.value = 0.00;
 	nsubamt.value = 0.00;
 	ntaxamt.value = 0.00;
@@ -187,6 +228,7 @@ function clear_view(){
 	nsalecust.value = 0.00;
 	ndescamt.value = 0.00
 	//poniendo foco en la barra de codigo para lectura del scanner.
+	
 	cservno1.focus();
 }
 function isvalidentry(){
@@ -248,12 +290,21 @@ function set_validation_table(){
 		oinput4[i].onchange = cksum;
 	}
 }
+
 function upddet(){
 	// validaciones standar previas.
 	var llcont = isvalidentry();
 	if (!llcont){
 		document.getElementById("cservno1").value="";
+		document.getElementById("nqty1").value = "";
+		document.getElementById("cservno1").foco();
+		
 		return ;
+	}
+	// cargando la cantidad por defecto
+	var lnqty1 = document.getElementById("nqty1").value;
+	if (lnqty1 == ""){
+		lnqty1 = 1;
 	}
 	// ---------------------------------------------------------------------------------------------------------
 	// a)- Verificando que el articulo exista.
@@ -272,7 +323,10 @@ function upddet(){
 	var odata = JSON.parse(oRequest.response); 
 	// mostrando pantalla de edicion de archivo
 	if (odata == null){
+		cservno1.value = "";
+		document.getElementById("nqty1").value = "";
 		getmsgalert("Codigo de Articulo No registrado");
+		document.getElementById("cservno1").focus();
 		return;
 	}	
 	
@@ -288,7 +342,7 @@ function upddet(){
 	oRow += "<td width='90px'><input type='text' class='saykey' readonly name='cservno' id='cservno' value="+ odata.cservno +"></td>";
 	oRow += "<td width='220px'>" + odata.cdesc     + "</td>";
 	oRow += "<td width='50px'><input type='number' class='sayamt' name='nprice' id='nprice' readonly value="+ odata.nprice +"></td>";
-	oRow += "<td width='75px'><input type='number' class='textqty' name='nqty'   id='nqty'   value=1></td>";
+	oRow += "<td width='75px'><input type='number' class='textqty' name='nqty'   id='nqty'   value="+ lnqty1 + "></td>";
 	oRow += "<td width='50px'><input type='number' class='textqty' name='ndesc'  id='ndesc'  value=0></td>";
 	oRow += "<td width='50px'><input type='number' class='sayamt' name='ntax'   id='ntax' readonly  value="+ odata.ntax +"></td>";
 	oRow += "<td width='75px' name='nsalesamt_u' id='nsalesamt_u' class='sayamt'>" + odata.nprice  + "</td>";
@@ -302,6 +356,8 @@ function upddet(){
 	// ---------------------------------------------------------------------------------------------------------
 	set_validation_table();
 	cksum();
+	cservno1.focus();
+	document.getElementById("nqty1").value = "";
 }
 //refresca el valor de los totales de la tabla.
 function guardar(){
@@ -390,12 +446,6 @@ function guardar(){
 	btsalir.style.display  ="none";
 	// mostrando el nuevo numero de factura.
 	ctrnno1.value = odata;
-
-	/*
-	// enviando mensaje de configuracion.
-	getmsgalert(oRequest.responseText.trim());
-	clear_view();
-	*/
 }
 function cksum(pcitem){
 	// validando el descuento maximo por linea de articulo.

@@ -40,8 +40,12 @@ if($lcAccion=="NEW"){
 		$lcctaid    = mysqli_real_escape_string($oConn,$_POST["cctaid"]);
 		$lmdirecc   = mysqli_real_escape_string($oConn,$_POST["mdirecc"]);
 		$lmnotas    = mysqli_real_escape_string($oConn,$_POST["mnotas"]);
-		$lncomision = mysqli_real_escape_string($oConn,($_POST["ncomision"]=="") ? 0 : $_POST["ncomision"]);
-		//$lndays    	 = isset($_POST["ndays"]) ? $_POST["ndays"]:0;
+		$lncomision  = mysqli_real_escape_string($oConn,($_POST["ncomision"]=="")  ? 0 : $_POST["ncomision"]);
+		$lncomision1 = mysqli_real_escape_string($oConn,($_POST["ncomision1"]=="") ? 0 : $_POST["ncomision1"]);
+		$lncomision2 = mysqli_real_escape_string($oConn,($_POST["ncomision2"]=="") ? 0 : $_POST["ncomision2"]);
+		$lcwhseno    = mysqli_real_escape_string($oConn,$_POST["cwhseno"]);
+		$lcmetodo    = mysqli_real_escape_string($oConn,$_POST["cmetodo"]);
+		//$lndays    = isset($_POST["ndays"]) ? $_POST["ndays"]:0;
 		$lndays    	 = empty($_POST["ndays"])?0:$_POST["ndays"];
 		
 		$lllunes     = isset($_POST["llunes"]) ? 1:0; //$_POST["llunes"];
@@ -68,15 +72,15 @@ if($lcAccion=="NEW"){
 		if ($lnCount == 0){
 			// este codigo de cliente no existe por tanto lo crea	
 			// ejecutando el insert para la tabla de clientes.
-			$lcsqlcmd = " insert into arresp (crespno,ncomision,cfullname,cstatus,cctaid,cruc, mtels,mdirecc,mnotas,cfoto,
+			$lcsqlcmd = " insert into arresp (crespno,ncomision,ncomision1,ncomision2,cmetodo,cwhseno, cfullname,cstatus,cctaid,cruc, mtels,mdirecc,mnotas,cfoto,
 												llunes,lmartes,lmiercoles,ljueves,lviernes,lsabado,ldomingo,ndays)
-		                   values('$lcrespno','$lncomision','$lcfullname','$lcstatus','$lcctaid','$lcruc','$lmtel','$lmdirecc','$lmnotas','$lcfotoI',
+		                   values('$lcrespno','$lncomision','$lncomision1','$lncomision2','$lcmetodo','$lcwhseno','$lcfullname','$lcstatus','$lcctaid','$lcruc','$lmtel','$lmdirecc','$lmnotas','$lcfotoI',
 						          $lllunes,$llmartes,$llmiercoles,$lljueves,$llviernes,$llsabado,$lldomingo,$lndays)";
 		}else{
 			// el codigo existe lo que hace es actualizarlo.	
 			//cfoto = '$lcfoto', este campo no se actualizara en el update tendra que ser mediante otra pantalla
 			
-			$lcsqlcmd = " update arresp set cfullname = '$lcfullname',ncomision = '$lncomision', cstatus = '$lcstatus', cctaid = '$lcctaid',
+			$lcsqlcmd = " update arresp set cfullname = '$lcfullname',ncomision = '$lncomision',ncomision1 = '$lncomision1',ncomision2 = '$lncomision2',cmetodo = '$lcmetodo', cwhseno = '$lcwhseno', cstatus = '$lcstatus', cctaid = '$lcctaid',
 							cruc = '$lcruc' , mtels = '$lmtel', mdirecc = '$lmdirecc', mnotas = '$lmnotas', $lcfoto
 							llunes = $lllunes, lmartes = $llmartes, lmiercoles = $llmiercoles, ljueves = $lljueves, lviernes = $llviernes,
 							lsabado = $llsabado, ldomingo = $lldomingo, ndays = $lndays

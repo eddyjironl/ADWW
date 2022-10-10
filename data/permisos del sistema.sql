@@ -127,6 +127,13 @@ delete from ksschgrd;
     ("PLMAST","03","Estado","cstatus",80,"PL"),
     ("PLMAST","04","Fecha Pago","dpay",100,"PL");
 
+  SET @lcSelect = " select * from arconm ";
+  INSERT INTO ksschgrd(calias,corder,cheader,mcolvalue,ncolwidth,cmodule)
+    VALUES("ARCONM","00","Listado de Contenedores",@lcSelect,0,"AR"),
+    ("ARCONM","01","Contenedor id","cconno",100,"AR"),
+    ("ARCONM","02","Descripcion","cdesc",200,"AR"),
+    ("ARCONM","03","Fecha","dtrndate",80,"AR");
+
 
 
 
@@ -143,6 +150,7 @@ insert into symenu(cmenuid,cdesc,cmodule,cgppmod)
     ("tr008","Anulacion de Facturas","AR","TRN"),
     ("tr009","Anulacion de Recibos","AR","TRN"),
     ("tr010","Anulacion Requisas","AR","TRN"),
+    ("tr012","Administracion de Contenedores","AR","TRN"),
     /* REPORTES*/
     ("rp001","Resumen de Ventas (Moneda)","AR","RPT"),
     ("rp013","Resumen de Ventas (Articulos)","AR","RPT"),
@@ -152,6 +160,7 @@ insert into symenu(cmenuid,cdesc,cmodule,cgppmod)
     ("rp004","Resumen de Cobros","AR","RPT"),
     ("rp005","Lista de Precios","AR","RPT"),
     ("rp006","Resumen de Uilidades y Costos","AR","RPT"),
+    ("rp015","Resumen de Comisiones","AR","RPT"),
     ("rp007","Formato de Requisas","AR","RPT"),
     ("rp008","Reporte de Movimiento de Inventario (Entradas y Salidas)","AR","RPT"),
     ("rp010","Movimientos de Inventario Valorisados AD","AR","RPT"),

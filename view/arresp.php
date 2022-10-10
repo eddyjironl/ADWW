@@ -19,7 +19,7 @@ if (vc_funciones::Star_session() == 1){
 			<!--barra principal de navegacion-->
 			<form class="form2" id="arresp" method="post" action="../modelo/crud_arresp.php?accion=NEW">
 				<SCRIPT>get_barraprinc_x("Catalogo de Proveedores","Ayuda del Catalogo de Proveedores",800);</SCRIPT> 
-				<fieldset id="set1">
+				<div class="contenedor_objetos" style="float:left;">
 					<label class="labelnormal" >Proveedor Id </label>
 					<input type="text" class="textkey" id="crespno" name="crespno"  autocomplete="off" autofocus>
 					<script>get_btmenu("btcrespno","Listado de Proveedores");</script>
@@ -35,9 +35,6 @@ if (vc_funciones::Star_session() == 1){
 					<br>
 					<label class="labelnormal" >Dias de credito</label>
 					<input type="number" id="ndays" name="ndays" class="textqty">
-					<br>
-					<label class="labelnormal" >Comision %</label>
-					<input type="number" id="ncomision" name="ncomision" class="textqty">
 					<br>
 					<label class="labelnormal" >Estado </label>
 					<select class="listas" id="cstatus" name="cstatus">
@@ -55,6 +52,27 @@ if (vc_funciones::Star_session() == 1){
 					<label>Comentarios Generales</label><br>
 					<textarea id="mnotas" name="mnotas" class="mnotas" rows=3 cols=43> </textarea>
 					<br>
+
+					<label class="labeltitle" >Pago de Comisiones Configuracion del Vendedor</label>
+					<br>
+					<label class="labelnormal">Metodo Calculo</label>
+					<select class="listas" id="cmetodo" name="cmetodo">
+						<option value="V">Vendedor Comisionista</option>
+						<option value="R">Responsable de Tienda</option>
+					</select>
+					<br>
+					<label class="labelnormal">Almacen Id</label>
+					<script>get_lista_arwhse();</script>
+					<br>
+					<label class="labelnormal" >Meta en Moneda </label>
+					<input type="number" id="ncomision" name="ncomision" class="textqty">
+					<br>
+					<label class="labelnormal">No cumple %</label>
+					<input type="number" id="ncomision1" name="ncomision1" class="textqty">
+					<br>
+					<label class="labelnormal">Si Cumple %</label>
+					<input type="number" id="ncomision2" name="ncomision2" class="textqty">
+					<br>
 					<label class="labeltitle"  align="center">Configuracion Dias de Visita</label><br>
 					<input type="checkbox" id="llunes"     name="llunes">Lunes</input>
 					<input type="checkbox" id="lmartes"    name="lmartes">Martes</input>
@@ -64,9 +82,9 @@ if (vc_funciones::Star_session() == 1){
 					<input type="checkbox" id="lviernes"   name="lviernes">Viernes</input>
 					<input type="checkbox" id="lsabado"    name="lsabado">sabado</input>
 					<input type="checkbox" id="ldomingo"   name="ldomingo">Domingo</input>
-				</fieldset>
+				</div>
 				
-				<fieldset id="set2">
+				<div class="contenedor_objetos" style="float:left;">
 					<label class="labeltitle" align="center">Fotografia del Proveedor</label><br>
 					<img align= "center" id="cfoto1" name="cfoto1" src="" width="292" height="292" alt="Foto no especificada"><br>
 					<input type="file"	name="cfoto" id="cfoto" >
@@ -78,7 +96,7 @@ if (vc_funciones::Star_session() == 1){
 					<label class="labelnormal" >Por Pagar</label>
 					<input class="sayamt" id="nsaldo" name="nsaldo">
 					<script>get_btdtrn("cdetcta","Estado de cuenta");</script>
-				</fieldset>			
+				</div>			
 
 			</form>
 		<!-- Presentacion del menu -->

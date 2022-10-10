@@ -17,14 +17,18 @@ if (vc_funciones::Star_session() == 1){
 		<link rel="shortcut icon" type="image/x-icon" href="../photos/vc2009.ico" />
 	</head>
 <style>
-  #helps{
-    display: inline-block;
-
-  }
+	body{
+		background: #44A08D;  /* fallback for old browsers */
+		background: -webkit-linear-gradient(to right, #093637, #44A08D);  /* Chrome 10-25, Safari 5.1-6 */
+		background: linear-gradient(to right, #093637, #44A08D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	}
+  	#helps{
+    	display: inline-block;
+	}
 </style>
 	<!-- background="../photos/fondo3.png" -->
 
-	<body id="espacio"  background="fondo3.png">
+	<body id="espacio" >
 		<iframe id="ventana"> </iframe>	
 
 		<div id="barra_small">

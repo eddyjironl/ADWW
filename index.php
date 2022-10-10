@@ -18,7 +18,15 @@ vc_funciones::init_index();
 		<script src="js/index.js"></script>
 
 	</head>
-	<body background="fondo3.png">
+	<style>
+		body{
+			background: #44A08D;  /* fallback for old browsers */
+			background: -webkit-linear-gradient(to right, #093637, #44A08D);  /* Chrome 10-25, Safari 5.1-6 */
+			background: linear-gradient(to right, #093637, #44A08D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+		}
+	</style>
+
+	<body>
 		<form  id="sysinit" name="sysinit" method="post" action="modelo/uservalid.php" >
 			<div id="divtitulo">
 				<h2>Inicio de Session</h2>

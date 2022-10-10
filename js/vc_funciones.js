@@ -513,7 +513,7 @@ function get_clear_view(){
 	var oinput_number   = document.querySelectorAll("input[type='numeric']");
 	var oinput_chek     = document.querySelectorAll("input[type='checkbox']");
 	
-	var oinput_types = document.querySelectorAll("input");
+	var oinput_types = document.querySelectorAll("input[type='text']");
 	var oinput_password = document.querySelectorAll("input[type='password']");
 	var oinput_url      = document.querySelectorAll("input[type='url']");
 	var oinput_tel      = document.querySelectorAll("input[type='tel']");

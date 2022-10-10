@@ -178,6 +178,7 @@ function change_module(){
 					'			<li><a id="rp003"> Estado de Cuentas</a></li>'+
 					'			<li><a id="rp009"> Vencimiento de Cartera </a></li>'+
 					'			<li><a id="rp004"> Resumen de Cobros</a></li>'+
+					'			<li><a id="rp015"> Resumen de Comisiones</a></li>'+
 					'		</ul>'+
 					'	</li>'+
 					'	<li><a>Catalogos</a>'+
@@ -205,6 +206,7 @@ function change_module(){
 					'		<ul>'+
 					'			<li><a id="tr004"> Entradas y Salidas de Inventario </a></li>'+
 					'			<li><a id="tr010"> Anulacion de Requisas </a></li>'+
+					'			<li><a id="tr011"> Administracion de Contenedores </a></li>'+
 					'			<li><a id="sy004" href="../index.php">Salir</a></li>'+
 					'		</ul>'+
 					'	</li>'+
@@ -517,6 +519,7 @@ function upd_armenu(){
 	document.getElementById("rp009").addEventListener("click",rp009,false);
 	document.getElementById("rp012").addEventListener("click",rp012,false);
 	document.getElementById("rp013").addEventListener("click",rp013,false);
+	document.getElementById("rp015").addEventListener("click",rp015,false);
 
 	document.getElementById("ca001").addEventListener("click",ca001,false);
 	document.getElementById("ca002").addEventListener("click",ca002,false);
@@ -535,7 +538,8 @@ function upd_armenu(){
 function upd_inmenu(){
 	document.getElementById("tr004").addEventListener("click",tr004,false);
 	document.getElementById("tr010").addEventListener("click",tr010,false);
-
+	document.getElementById("tr011").addEventListener("click",tr011,false);
+	
 	document.getElementById("ca003").addEventListener("click",ca003,false);
 	document.getElementById("ca004").addEventListener("click",ca004,false);
 	document.getElementById("ca005").addEventListener("click",ca005,false);
@@ -649,6 +653,14 @@ function tr010(){
 		getmsgalert("Usuario no tiene derecho de acceso");
 	}
 
+}
+function tr011(){
+	var llcont = doform("tr011");
+	if (llcont){
+		document.getElementById("ventana").setAttribute("src","../view/arconm.php");
+	}else{
+		getmsgalert("Usuario no tiene derecho de acceso");
+	}
 }
 
 
@@ -779,6 +791,16 @@ function rp014(){
 	if (llcont){
 		// vencimiento de cartera
 		document.getElementById("ventana").setAttribute("src","../view/arcdex_r.php");
+	}else{
+		getmsgalert("Usuario no tiene derecho de acceso");
+	}
+}
+function rp015(){
+	// Maximos y Minimos
+	var llcont = doform("rp015");
+	if (llcont){
+		// vencimiento de cartera
+		document.getElementById("ventana").setAttribute("src","../view/arinvc1_r.php");
 	}else{
 		getmsgalert("Usuario no tiene derecho de acceso");
 	}

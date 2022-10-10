@@ -96,6 +96,10 @@ function update_window(pckeyid){
 		document.getElementById("cruc").value    = odata.cruc;
 		document.getElementById("mtel").value    = odata.mtels;
 		document.getElementById("ncomision").value = odata.ncomision;
+		document.getElementById("ncomision1").value = odata.ncomision1;
+		document.getElementById("ncomision2").value = odata.ncomision2;
+		document.getElementById("cmetodo").value = odata.cmetodo;
+		document.getElementById("cwhseno").value = odata.cwhseno;
 		document.getElementById("mdirecc").value = odata.mdirecc;
 		document.getElementById("mnotas").value  = odata.mnotas;
 		document.getElementById("cfoto1").setAttribute("src",odata.cfoto) ;

@@ -609,6 +609,9 @@ CREATE TABLE `arresp` (
   `cfoto` char(200) COLLATE utf8_spanish_ci NOT NULL default '',
   `nbalance` decimal(10,2)  default 0.00,
   `ncomision` decimal(10,2) not null default '0.00',
+  `ncomision1` decimal(10,2) not null default '0.00',
+  `ncomision2` decimal(10,2) not null default '0.00',
+  `cwhseno` char(10) COLLATE utf8_spanish_ci not null default '',
   `nbuyamt` decimal(10,2) NOT NULL DEFAULT '0.00',
   `ndays` int(3) NOT NULL DEFAULT '0',
   `llunes` tinyint(1) NOT NULL DEFAULT '0',
@@ -762,5 +765,38 @@ CREATE TABLE `arwhse` (
   `hora` time(6) default CURRENT_TIME
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+drop table if exists arconm;
+create table arconm(
+  cconno char(10) primary key,
+  dtrndate date default CURRENT_DATE,
+  cdesc char(200) default '',
+  mnotas text not null default '',
+  nlibras_in decimal(10,2) default 0.00,
+  nlibras_out decimal(10,2) default 0.00
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+
+/* detalle de descargas */
+drop table if exists arcont1;
+create table arcont1(
+  id integer(10) AUTO_INCREMENT primary key,
+  cconno char(10),
+  ccateno char(10), 
+  dtrndate date default CURRENT_DATE,
+  mnotas text not null default '',
+  nlibras_in decimal(10,2) default 0.00
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+/* Envio a sucursales*/
+drop table if exists arcont2;
+create table arcont2(
+  id integer(10) AUTO_INCREMENT primary key,
+  cconno char(10),
+  cwhseno char(10), /* familia de la divicion */
+  ccateno char(10), /* familia de la divicion */
+  dtrndate date default CURRENT_DATE,
+  mnotas text not null default '',
+  nlibras_out decimal(10,2) default 0.00
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 COMMIT;

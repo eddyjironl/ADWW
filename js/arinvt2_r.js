@@ -18,6 +18,22 @@ function init(){
 	// responsables o vendedores.
 	document.getElementById("btcrespno_1").addEventListener("click",show_menu_arresp,false);
 	document.getElementById("btcrespno_2").addEventListener("click",show_menu_arresp,false);
+	// Articulos.
+	// funcion menu interactivo
+	document.getElementById("btcservno_1").addEventListener("click",function(){
+		get_menu_list("arserm","showmenulist","cservno_1","valid_cservno");
+	},false);
+	document.getElementById("btcservno_2").addEventListener("click",function(){
+		get_menu_list("arserm","showmenulist","cservno_2","valid_cservno");
+	},false);
+
+	// tipos de inventario	
+	document.getElementById("btctserno_1").addEventListener("click",function(){
+		get_menu_list("artser","showmenulist","ctserno_1","valid_cservno");
+	},false);
+	document.getElementById("btctserno_2").addEventListener("click",function(){
+		get_menu_list("artser","showmenulist","ctserno_2","valid_cservno");
+	},false);
 	
 	// una funcion de ordenamiento segun el menu que se elija.
 	// Lista de ordenamiento
@@ -48,6 +64,9 @@ function print(){
  document.getElementById("arinvt2_r").submit();
 }
 
+function valid_cservno(){
+	return ;
+}
 
 // ----------------------------------------------------------------------
 // MENU DE CLIENTES.
@@ -76,7 +95,6 @@ function select_xkey(e){
 
 	if (xMenuId == "btcrespno_1"){document.getElementById("crespno_1").value = lckey;}
 	if (xMenuId == "btcrespno_2"){document.getElementById("crespno_2").value = lckey;}
-	
 }
 
 
@@ -366,6 +384,11 @@ function get_mx_detalle_arresp(){
 			oRowDet[i].addEventListener("click",select_xkey,false);
 		}		
 }
+
+
+
+
+
 // ----------------------------------------------------------------------
 
 window.onload=init;

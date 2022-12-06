@@ -207,6 +207,7 @@ function change_module(){
 					'			<li><a id="tr004"> Entradas y Salidas de Inventario </a></li>'+
 					'			<li><a id="tr010"> Anulacion de Requisas </a></li>'+
 					'			<li><a id="tr011"> Administracion de Contenedores </a></li>'+
+					'			<li><a id="tr012"> Exportacion de Inventarios </a></li>'+
 					'			<li><a id="sy004" href="../index.php">Salir</a></li>'+
 					'		</ul>'+
 					'	</li>'+
@@ -539,6 +540,7 @@ function upd_inmenu(){
 	document.getElementById("tr004").addEventListener("click",tr004,false);
 	document.getElementById("tr010").addEventListener("click",tr010,false);
 	document.getElementById("tr011").addEventListener("click",tr011,false);
+	document.getElementById("tr012").addEventListener("click",tr012,false);
 	
 	document.getElementById("ca003").addEventListener("click",ca003,false);
 	document.getElementById("ca004").addEventListener("click",ca004,false);
@@ -658,6 +660,14 @@ function tr011(){
 	var llcont = doform("tr011");
 	if (llcont){
 		document.getElementById("ventana").setAttribute("src","../view/arconm.php");
+	}else{
+		getmsgalert("Usuario no tiene derecho de acceso");
+	}
+}
+function tr012(){
+	var llcont = doform("tr011");
+	if (llcont){
+		document.getElementById("ventana").setAttribute("src","../view/arcexp.php");
 	}else{
 		getmsgalert("Usuario no tiene derecho de acceso");
 	}

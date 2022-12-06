@@ -62,8 +62,8 @@ if($lcaccion=="NEW"){
 		if ($lnCount == 0){
 			// este codigo de cliente no existe por tanto lo crea	
 			// ejecutando el insert para la tabla de clientes.
-			$lcsqlcmd = " insert into arconm (cconno,cdesc,dtrndate,mnotas)
-							values('$lcconno','$lcdesc','$ldtrndate','$lmnotas')";
+			$lcsqlcmd = " insert into arconm (cconno,cdesc,dtrndate,mnotas,lexport, cadjno)
+							values('$lcconno','$lcdesc','$ldtrndate','$lmnotas',0,'')";
 		}else{
 			// el codigo existe lo que hace es actualizarlo.	
 			$lcsqlcmd = " update arconm set dtrndate = '$ldtrndate', cdesc = '$lcdesc',mnotas = '$lmnotas'  where cconno = '$lcconno' ";
@@ -105,9 +105,9 @@ if($lcaccion == "GET_DETAIL"){
 					where cconno ='". $_POST["cconno"] ."' ";
 
 	}else{
-		$lcSqlCmd = "select arcont2.* ,arwhse.cdesc as cwhsenodesc 
+		$lcSqlCmd = "select arcont2.* ,arserm.cdesc as cservnodesc 
 					from $lcalias 
-					left outer join arwhse on arwhse.cwhseno = arcont2.cwhseno
+					left outer join arserm on arserm.cservno = arcont2.cservno
 					where cconno ='". $_POST["cconno"] ."' ";
 	}
 	$lcResult = mysqli_query($oConn,$lcSqlCmd);
@@ -128,9 +128,9 @@ if($lcaccion == "GET_DETAIL"){
 		// convirtiendo estos datos en un array asociativo
 		while ($row = mysqli_fetch_assoc($lcResult)){
 			if($lnveces == 0){
-				$ldata = '[{"id":"'.$row["id"].'", "dtrndate":"'.$row['dtrndate'].'", "cwhseno":"'.$row["cwhseno"].'", "cwhsenodesc":"'.$row["cwhsenodesc"].'", "mnotas":"'.$row["mnotas"].'", "nlibras_out":'.$row["nlibras_out"]. '}';
+				$ldata = '[{"id":"'.$row["id"].'", "dtrndate":"'.$row['dtrndate'].'", "cservno":"'.$row["cservno"].'", "cservnodesc":"'.$row["cservnodesc"].'", "mnotas":"'.$row["mnotas"].'", "nqty":'.$row["nqty"]. ',"cadjno":"'.$row["cadjno"]. '"}';
 			}else{
-				$ldata = $ldata . ',{"id":"'.$row["id"].'", "dtrndate":"'.$row['dtrndate'].'", "cwhseno":"'.$row["cwhseno"].'", "cwhsenodesc":"'.$row["cwhsenodesc"].'", "mnotas":"'.$row["mnotas"].'", "nlibras_out":'.$row["nlibras_out"]. '}';
+				$ldata = $ldata . ',{"id":"'.$row["id"].'", "dtrndate":"'.$row['dtrndate'].'", "cservno":"'.$row["cservno"].'", "cservnodesc":"'.$row["cservnodesc"].'", "mnotas":"'.$row["mnotas"].'", "nqty":'.$row["nqty"]. ',"cadjno":"'.$row["cadjno"]. '"}';
 			}
 			$lnveces += 1;
 		}
@@ -169,16 +169,16 @@ if($lcaccion == "INSERT_IN"){
 		$lcconno   = mysqli_real_escape_string($oConn,$_POST["cconno"]);
 		$ldtrndate = mysqli_real_escape_string($oConn,$_POST["dtrndate2"]);
 		$lmnotas   = mysqli_real_escape_string($oConn,$_POST["mnotas2"]);
-		$lcwhseno  = mysqli_real_escape_string($oConn,$_POST["cwhseno"]);
-		$lnlibras  = mysqli_real_escape_string($oConn,$_POST["nlibras_out"]);
+		$lcservno  = mysqli_real_escape_string($oConn,$_POST["cservno"]);
+		$lnqty     = mysqli_real_escape_string($oConn,$_POST["nqty"]);
 		if ($lnid){
-			$lcsqlcmd  = "update arcont2 set cwhseno = '$lcwhseno',
-												mnotas     = '$lmnotas',
-												dtrndate   = '$ldtrndate',
-												nlibras_out =  $lnlibras where id = $lnid ";
+			$lcsqlcmd  = "update arcont2 set cservno = '$lcservno',
+											  mnotas     = '$lmnotas',
+											  dtrndate   = '$ldtrndate',
+											  nqty =  $lnqty where id = $lnid ";
 		}else{
-			$lcsqlcmd  = "insert into arcont2 (cconno, cwhseno, mnotas, dtrndate,nlibras_out) 
-			              values('$lcconno','$lcwhseno','$lmnotas','$ldtrndate',$lnlibras)";
+			$lcsqlcmd  = "insert into arcont2 (cconno, cservno, mnotas, dtrndate,nqty) 
+			              values('$lcconno','$lcservno','$lmnotas','$ldtrndate',$lnqty)";
 		}
 		
 	}

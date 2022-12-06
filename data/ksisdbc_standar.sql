@@ -792,7 +792,10 @@ drop table if exists arcont2;
 create table arcont2(
   id integer(10) AUTO_INCREMENT primary key,
   cconno char(10),
-  cwhseno char(10), /* familia de la divicion */
+  cservno char(20) default '', /* Producto obtenido */
+  nqty    decimal (10,2) default 0.00,;
+  lexport boolean not null default FALSE ;
+  cadjno char(10) not null, /* familia de la divicion */
   ccateno char(10), /* familia de la divicion */
   dtrndate date default CURRENT_DATE,
   mnotas text not null default '',

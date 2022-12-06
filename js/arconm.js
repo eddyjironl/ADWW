@@ -15,6 +15,7 @@ function init(){
 	document.getElementById("btcconno").addEventListener("click",function(){
         get_menu_list("arconm","showmenulist","cconno","valid_ckeyid");
     },false);
+	//----------------------------------------------------------------------------
 	// desplegando pantallas de registro
 	document.getElementById("btinfo1").addEventListener("click",show_info,false);
 	document.getElementById("btinfo2").addEventListener("click",show_info,false);
@@ -64,15 +65,15 @@ function addlinein(e){
 	}else{
 		oDatos.append("id2",document.getElementById("id2").value);
 		oDatos.append("dtrndate2",document.getElementById("dtrndate2").value);
-		oDatos.append("nlibras_out",document.getElementById("nlibras_out2").value);
-		oDatos.append("cwhseno",document.getElementById("cwhseno").value);
+		oDatos.append("nqty",document.getElementById("nqty").value);
+		oDatos.append("cservno",document.getElementById("cservno").value);
 		oDatos.append("mnotas2",document.getElementById("mnotas2").value);
 		document.getElementById("id2").value = "";
 		document.getElementById("dtrndate2").value = get_date_comp();
-		document.getElementById("nlibras_out2").value= "";
-		document.getElementById("cwhseno").value = "";
+		document.getElementById("nqty").value= "";
+		document.getElementById("cservno").value = "";
 		document.getElementById("mnotas2").value = "";
-		document.getElementById("nlibras_out2").focus();
+		document.getElementById("nqty").focus();
 	}
 	oDatos.append("accion","INSERT_IN");
 	// obteniendo el menu
@@ -102,14 +103,14 @@ function edit_upd_line(ofile, pnopc){
 		document.getElementById("id1").value         = oData.parentElement.parentElement.children[0].innerHTML;
 		document.getElementById("dtrndate1").value   = oData.parentElement.parentElement.children[1].innerHTML;
 		document.getElementById("nlibras_in1").value = oData.parentElement.parentElement.children[2].innerHTML;
-		document.getElementById("ctserno").value    = oData.parentElement.parentElement.children[3].innerHTML;
+		document.getElementById("ctserno").value     = oData.parentElement.parentElement.children[3].innerHTML;
 		document.getElementById("mnotas1").value 	 = oData.parentElement.parentElement.children[5].innerHTML;
 		document.getElementById("add1").style.display="block";
 	}else{
 		document.getElementById("id2").value         = oData.parentElement.parentElement.children[0].innerHTML;
 		document.getElementById("dtrndate2").value   = oData.parentElement.parentElement.children[1].innerHTML;
-		document.getElementById("nlibras_out2").value = oData.parentElement.parentElement.children[2].innerHTML;
-		document.getElementById("cwhseno").value    = oData.parentElement.parentElement.children[3].innerHTML;
+		document.getElementById("nqty").value 		 = oData.parentElement.parentElement.children[2].innerHTML;
+		document.getElementById("cservno").value     = oData.parentElement.parentElement.children[3].innerHTML;
 		document.getElementById("mnotas2").value 	 = oData.parentElement.parentElement.children[5].innerHTML;
 		document.getElementById("add2").style.display="block";
 	
@@ -172,13 +173,18 @@ function refresh_view1(copc){
 					lcrow = '<tr>';
 					lcrow += '<td class="rowhtext" >' + odata[index].id + '</td>';
 					lcrow += '<td class="rowhtext">'  + odata[index].dtrndate + '</td>';
-					lcrow += '<td class="rowhqty">'  + odata[index].nlibras_out + '</td>';
-					lcrow += '<td class="rowhtext" >' + odata[index].cwhseno + '</td>';
-					lcrow += '<td class="rowhtext" >' + odata[index].cwhsenodesc + '</td>';
+					lcrow += '<td class="rowhtext" >' + odata[index].cservno + '</td>';
+					lcrow += '<td class="rowhtext" >' + odata[index].cservnodesc + '</td>';
+					lcrow += '<td class="rowhqty">'  + odata[index].nqty + '</td>';
+					lcrow += '<td class="rowhtext">'  + odata[index].cadjno + '</td>';
 					lcrow += '<td class="rowhtext" >' + odata[index].mnotas + '</td>';
 					lcrow += '<td ">';
-					lcrow += '	<input type="button" value="Editar"   class="btlinks" id="btneditar2" onclick="edit_upd_line(this,2)" >';	
-					lcrow += '	<input type="button" value="Eliminar" class="btlinks_warning" onclick="delete_row1(this,2)">	';
+					if(odata[index].cadjno == ""){
+						lcrow += '	<input type="button" value="Editar"   class="btlinks" id="btneditar2" onclick="edit_upd_line(this,2)" >';	
+						lcrow += '	<input type="button" value="Eliminar" class="btlinks_warning" onclick="delete_row1(this,2)">	';
+					}else{
+						lcrow += '<strong> Registro exportado a Inventario</strong>';	
+					}
 					lcrow += '</td>';
 					lcrow += '</tr>';
 					// insertando dato en la tabla
@@ -202,8 +208,8 @@ function show_view(e){
 	}else{
 		document.getElementById("id2").value         = "";
 		document.getElementById("dtrndate2").value   = get_date_comp()
-		document.getElementById("nlibras_out2").value = "";
-		document.getElementById("cwhseno").value     = "";
+		document.getElementById("nqty").value = "";
+		document.getElementById("cservno").value     = "";
 		document.getElementById("mnotas2").value 	 = "";
 		document.getElementById("add2").style.display="block";
 

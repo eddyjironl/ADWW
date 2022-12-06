@@ -19,6 +19,8 @@ function init(){
 	document.getElementById("btcrespno_1").addEventListener("click",show_menu_arresp,false);
 	document.getElementById("btcrespno_2").addEventListener("click",show_menu_arresp,false);
 	
+	// Articulos.
+
 	// una funcion de ordenamiento segun el menu que se elija.
 	// Lista de ordenamiento
 	document.getElementById("mx_opc_order").addEventListener("click",get_mx_detalle,false);
@@ -26,6 +28,10 @@ function init(){
 	document.getElementById("mx_cbuscar").addEventListener("input",get_mx_detalle,false);
 	// ------------------------------------------------------------------------
 }
+function valid_cservno(){
+	return ;
+}
+
 function nueva(){
 	var objects = document.querySelectorAll("input");
 	var olista = document.querySelectorAll("select");

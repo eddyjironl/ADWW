@@ -43,8 +43,8 @@ if (vc_funciones::Star_session() == 1){
             </div>
 			<br>
 			<input type="button" class="btlinks" id="btinfo1" value="Detalle de Ingresos" placeholder="Detalle de Ingresos">
-			<input type="button" class="btlinks" id="btinfo2" value="Detalle de Envios" placeholder="Detalle de Envios a Bodega">
-
+			<input type="button" class="btlinks" id="btinfo2" value="Desgloce de Articulos" placeholder="Desglose de articulos">
+			
 		</form>
 		<!-- pantalla despliegue de informacion -->
 		<div id="info1_w" class="form2  area_bloqueo">
@@ -52,6 +52,14 @@ if (vc_funciones::Star_session() == 1){
 				<strong>Detalle de Recepcion</strong><br>
 				<input type="button" value="Agregar" class="btlinks_warning" id="btshow1" placeholder="Agregar Datos">
 				<input type="button" value="Cerrar"  class="btlinks_warning" id="btclosed1" placeholder="Cerrar Pantalla">
+
+
+				<form target="_blank" method="POST" action="../reports/rpt_arconm.php" style="DISPLAY: INLINE;">
+					<label class="labelnormal">Contenedor</label>
+					<input type="text" class="ckey" name="cconno" value="1">
+					<input type="submit" class="btlinks"  value="Reporte Recepcion" placeholder="Resumen Recepciones">
+				</form>
+
 			</div>
 			<br>
 			<div class="contenedor_objetos">
@@ -106,7 +114,7 @@ if (vc_funciones::Star_session() == 1){
 		<!-- pantalla despliegue de informacion -->
 		<div id="info2_w" class="form2  area_bloqueo">
 			<div class="barra_info">
-				<strong>Detalle de Envios</strong><br>
+				<strong>Detalle de Articulos</strong><br>
 				<input type="button" value="Agregar" class="btlinks_warning" id="btshow2" placeholder="Agregar Datos">
 				<input type="button" value="Cerrar" class="btlinks_warning" id="btclosed2" placeholder="Cerrar Pantalla">
 			</div>
@@ -117,9 +125,10 @@ if (vc_funciones::Star_session() == 1){
 						<tr >
 							<th class="rowhtext">Id</th>
 							<th class="rowhtext">Fecha</th>
-							<th class="rowhqty">libras</th>
-							<th class="rowhtext">Bodega Id</th>
+							<th class="rowhtext">Articulo Id</th>
 							<th class="rowhtext">Descripcion</th>
+							<th class="rowhqty">Unidades</th>
+							<th class="rowhtext">Requisa #</th>
 							<th class="rowhtext">Comentarios</th>
 							<th class="rowhtext">Acciones</th>
 						</tr>
@@ -132,7 +141,7 @@ if (vc_funciones::Star_session() == 1){
 		<!-- pantalla adicion de informacion de informacion -->
 		<div id="add2" class="form2 area_bloqueo">
 			<div class="barra_info">
-				<strong>Agregando informacion de Envios a Bodega</strong>
+				<strong>Agregando Articulos de Inventario</strong>
 				<br>
 				<input type="button" value="Guardar" class="btlinks_warning" id="btadd2" placeholder="Guarda la informacion ">
 				<input type="button" value="Cerrar"  class="btlinks_warning" id="btclosed22" placeholder="Cierra la pantalla">
@@ -147,16 +156,26 @@ if (vc_funciones::Star_session() == 1){
 				<input type="date" id="dtrndate2" class="textdate">
 				<br>
 
-				<label class="labelnormal">Libras</label>
-				<input type="number" id="nlibras_out2">
+				<label class="labelnormal">Unidades</label>
+				<input type="number" id="nqty">
 				<br>
 
-				<label class="labelnormal">Tipo</label>
-				<script> get_lista_arwhse();</script>
+				<label class="labelnormal">Articulo</label>
+				<select id="cservno" name="cservno">
+					<option>Seleccione un Articulo </option>
+					<?php 
+						$lcsqlcmd = "select cservno , cdesc from arserm order by cdesc desc  ";
+						$oConn = vc_funciones::get_coneccion("CIA");
+						$lcresult = mysqli_query($oConn, $lcsqlcmd);
+						while($lnrow = mysqli_fetch_assoc($lcresult)){
+							echo "<option value=".$lnrow["cservno"] .">". $lnrow["cdesc"] ."</option>";
+						}
+					?>
+				</select>
 				<br>
 				<llabel class="labelsencilla">Comentarios</llabel>
 				<br>
-				<textarea rows="5" cols="50" id="mnotas2" placeholder="si necesita poga un comentario"></textarea>
+				<textarea rows="5" cols="50" id="mnotas2" placeholder="si necesita ponga un comentario"></textarea>
 			</div>
 		</div>
 

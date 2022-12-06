@@ -105,7 +105,7 @@
 								  " arinvc.crespno <= '". $crespno_2 ."' ";
 		}
 	}
-	
+		
 	// fecha de emision de factura.
 	$dstar_1 = mysqli_real_escape_string($oConn,$_POST["dstar_1"]);
 	$dstar_2 = mysqli_real_escape_string($oConn,$_POST["dstar_2"]);

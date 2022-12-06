@@ -68,6 +68,14 @@ class PDF extends FPDF{
 		$this->SetTextColor(255,255,255);
 		
 		switch ($GLOBALS["lcrptname"]) {
+			case "rpt_arconm1":
+				$this->cell(30,5,"Contenedor",0,0,"L",TRUE);
+				$this->cell(60,5,"Descripcion",0,0,"L",TRUE);  					
+				$this->cell(30,5,"Fecha ingreso",0,0,"L",TRUE);  					
+				$this->cell(30,5,"Libras Recibidas ",0,0,"R",TRUE);  					
+				$this->cell(30,5,"Libras Distribuidas",0,0,"R",TRUE);  					
+				$this->cell(60,5,"Comentarios",0,1,"R",TRUE);  					
+				break;
 			case "rpt_arinvt1_r":
 				$this->cell(60,5,"Nombre del Vendedor (a)",0,0,"L",TRUE);
 				$this->cell(30,5,"Cargo",0,0,"L",TRUE);  					

@@ -62,6 +62,20 @@
 					<script>get_btmenu("btcrespno_2","Lista de Responsables / Vendedores"); </script>
 					<br>
 
+					<label class="labelfiltro">Articulo id</label>
+					<input type="text" id="cservno_1" name="cservno_1"  class="ckey">
+					<script>get_btmenu("btcservno_1","Lista de articulos"); </script>
+					<input type="text" id="cservno_2" name="cservno_2" class="ckey">
+					<script>get_btmenu("btcservno_2","Lista de articulos"); </script>
+					<br>
+
+					<label class="labelfiltro">Tipo articulo id</label>
+					<input type="text" id="ctserno_1" name="ctserno_1"  class="ckey">
+					<script>get_btmenu("btctserno_1","Lista de tipos de articulos"); </script>
+					<input type="text" id="ctserno_2" name="ctserno_2" class="ckey">
+					<script>get_btmenu("btctserno_2","Lista de tipos de articulos"); </script>
+					<br>
+
 					<label class="labelfiltro">Referencia</label>
 					<input type="text" id="crefno" name="crefno">
 					<br>
@@ -73,7 +87,7 @@
 					<!-- -->
 				</fieldset>
 		</form>
-		
+		<div id="showmenulist"></div>
 		<script>get_xm_menu();
 				get_msg();
 				//get_btdtrn("btprint2","Imprimiendo reporte", "../reports/rpt_arinvc.php");

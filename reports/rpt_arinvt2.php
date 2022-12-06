@@ -106,7 +106,30 @@
 								  " arinvc.crespno <= '". $crespno_2 ."' ";
 		}
 	}
-	
+	// Tipo articulo
+	$ctserno_1 = mysqli_real_escape_string($oConn,$_POST["ctserno_1"]);
+	$ctserno_2 = mysqli_real_escape_string($oConn,$_POST["ctserno_2"]);
+	if(!empty($ctserno_1)){
+		if($ctserno_1 == $ctserno_2 or empty($ctserno_2)) {
+			$lcwhere = $lcwhere . (empty($lcwhere)?"":" and ") . " artser.ctserno = '". $ctserno_1 ."' ";
+		}else{
+			$lcwhere = $lcwhere . (empty($lcwhere)?"":" and ") . " artser.ctserno >= '". $ctserno_1 ."' and ".
+								  " artser.ctserno <= '". $crespno_2 ."' ";
+		}
+	}
+
+	// articulo
+	$cservno_1 = mysqli_real_escape_string($oConn,$_POST["cservno_1"]);
+	$cservno_2 = mysqli_real_escape_string($oConn,$_POST["cservno_2"]);
+	if(!empty($cservno_1)){
+		if($cservno_1 == $cservno_2 or empty($cservno_2)) {
+			$lcwhere = $lcwhere . (empty($lcwhere)?"":" and ") . " arinvt.cservno = '". $cservno_1 ."' ";
+		}else{
+			$lcwhere = $lcwhere . (empty($lcwhere)?"":" and ") . " arinvt.cservno >= '". $cservno_1 ."' and ".
+								  " arinvt.cservno <= '". $cservno_2 ."' ";
+		}
+	}
+
 	// fecha de emision de factura.
 	$dstar_1 = mysqli_real_escape_string($oConn,$_POST["dstar_1"]);
 	$dstar_2 = mysqli_real_escape_string($oConn,$_POST["dstar_2"]);
@@ -140,9 +163,11 @@
                     arinvt.nprice,
                     arinvt.ndesc,
                     sum(nqty) as nqty,
-                    sum(nqty * nprice) as ntotal
+                    sum(nqty * arinvt.nprice) as ntotal
                 from arinvc 
                 join arinvt on arinvc.cinvno = arinvt.cinvno
+				left outer join arserm on arserm.cservno  = arinvt.cservno
+				left outer join artser on artser.ctserno  = arserm.ctserno
                 left outer join arcust on arcust.ccustno  = arinvc.ccustno
                 left outer join artcas on artcas.cpaycode = arinvc.cpaycode
                 left outer join arresp on arresp.crespno  = arinvc.crespno 
@@ -150,16 +175,18 @@
                 $lcwhere  group BY 1,3 order by 1,7 desc ";			
     
     // B) sumarizando venta total
-    $lcvtaneta = " select sum(nqty * nprice) as ntotal_final
+    $lcvtaneta = " select sum(nqty * arinvt.nprice) as ntotal_final
                     from arinvc 
                     join arinvt on arinvc.cinvno = arinvt.cinvno
-                    left outer join arcust on arcust.ccustno  = arinvc.ccustno
+					left outer join arserm on arserm.cservno  = arinvt.cservno
+					left outer join artser on artser.ctserno  = arserm.ctserno
+					left outer join arcust on arcust.ccustno  = arinvc.ccustno
                     left outer join artcas on artcas.cpaycode = arinvc.cpaycode
                     left outer join arresp on arresp.crespno  = arinvc.crespno 
                     left outer join arwhse on arwhse.cwhseno  = arinvc.cwhseno
                     $lcwhere ";			
 
-
+	
     $lcrestgrp = mysqli_query($oConn,$lcsqlcmd);	
 
     if (!$lcrestgrp){
